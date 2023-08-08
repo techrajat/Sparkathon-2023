@@ -37,5 +37,3 @@ def search_result(desc):
     sim_scores = sim_scores[:50] # Get the top 50 results
     article_indices = [score[0] for score in sim_scores]
     return articles['article_id'].iloc[article_indices].values
-
-print(search_result("jogger menswear"))
