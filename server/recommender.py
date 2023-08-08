@@ -4,7 +4,7 @@ import pickle
 articles = pd.read_csv('articles.csv')
 indices = pd.Series(articles.index, index=articles['article_id']).drop_duplicates()
 
-# Load both 'cos_sim' and 'indices' from the pickle file :-
+# Load cos_sim from the pickle file :-
 with open('recommender.pkl', 'rb') as file:
     cos_sim = pickle.load(file)
 
