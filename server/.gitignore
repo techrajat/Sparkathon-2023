@@ -5,3 +5,7 @@ articles.csv
 recommender.pkl
 tfidf.pkl
 tfidf_matrix.pkl
+
+# Environment files :-
+env/
+__pycache__/
