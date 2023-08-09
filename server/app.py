@@ -6,4 +6,4 @@ from flask_cors import CORS
 CORS(app)
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000) # Start the backend at port 8000
+    app.run(debug=True, port=8000) # Start the server at port 8000
