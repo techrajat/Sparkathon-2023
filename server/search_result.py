@@ -8,6 +8,15 @@ from sklearn.metrics.pairwise import cosine_similarity
 articles = pd.read_csv('articles.csv')
 indices = pd.Series(articles.index, index=articles['article_id']).drop_duplicates()
 
+cols = ['prod_name', 'product_type_name', 'product_group_name',
+        'graphical_appearance_name', 'colour_group_name',
+        'perceived_colour_value_name', 'perceived_colour_master_name',
+        'department_name', 'index_name', 'index_group_name', 'section_name',
+        'garment_group_name', 'detail_desc']
+
+articles['combined_cols'] = articles[cols].apply(lambda row: ' '.join(row.values.astype(str)), axis=1)
+articles = articles[['article_id', 'combined_cols']]
+
 def text_process(desc):
     # Remove punctuation :-
     noPunc = [c for c in desc if c not in string.punctuation]
@@ -21,12 +30,9 @@ def text_process(desc):
     desc_cleaned = [stemmer.stem(word) for word in desc_stopwords]
     return desc_cleaned
 
-# Load the tfidf_matrix from the pickle file :-
-with open('tfidf.pkl', 'rb') as file:
-    tfidf = pickle.load(file)
-with open('tfidf_matrix.pkl', 'rb') as file:
-    tfidf_matrix = pickle.load(file)
-
+from sklearn.feature_extraction.text import TfidfVectorizer
+tfidf = TfidfVectorizer(analyzer=text_process)
+tfidf_matrix = tfidf.fit_transform(articles['combined_cols'])
 
 # Method for showing search results with a given description of the product :-
 def search_result(desc):
