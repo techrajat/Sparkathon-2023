@@ -1,3 +1,5 @@
+/* Navbar begins */
+
 .mobileView{
     display: none;
 }
@@ -103,4 +105,13 @@
   .sidebar-icon {
     font-size: 20px;
   }
-  
+
+/* Navbar ends */
+
+/* Hero section starts */
+
+.card, .card-detail{
+  height: 430px;
+}
+
+/* Hero section starts */

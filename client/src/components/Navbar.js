@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../app.css"
+import "../App.css"
 import logo from "../assets/logo1.svg";
 import logo2 from "../assets/logo.png";
 import { FaLayerGroup } from "react-icons/fa";
@@ -69,7 +69,7 @@ const Navbar = () => {
         {/* Middle */}
         <div className="searchDiv relative lg:flex items-center flex-1">
           <div className="relative flex-1">
-            <input type="search" id="searchBar" className="rounded-full py-1.5 px-4 outline-0 w-full pr-10 text-black" />
+            <input type="search" placeholder="Search Walmart" id="searchBar" className="rounded-full py-1.5 px-4 outline-0 w-full pr-10 text-black" />
             <div className="absolute bg-[#ffc220] p-1.5 rounded-full right-1.5 top-1/2 transform -translate-y-1/2">
               <GoSearch className="text-black" />
             </div>
