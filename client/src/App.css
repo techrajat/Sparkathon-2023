@@ -23,7 +23,6 @@
     }
 }
 
-
 .mobile-navbar {
     display: flex;
     justify-content: space-between;
@@ -110,11 +109,15 @@
 
 /* Hero section starts */
 
-.card, .card-detail{
+.hero{
+  background-color: #e6f1fc;
+}
+
+.offer, .offer-detail{
   height: 430px;
 }
 
-/* Hero section starts */
+/* Hero section ends */
 
 /* Deals section starts */
 
@@ -124,4 +127,30 @@
   }
 }
 
-/* Deals section starts */
+/* Deals section ends */
+
+/* Search result section starts */
+
+#searchResult{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.card{
+  margin: 30px;
+  border: none;
+}
+
+.card span{
+  font-weight: bold;
+  font-size: larger;
+}
+
+.card-title{
+  margin-top: 10px;
+}
+
+/* Search result section ends */
