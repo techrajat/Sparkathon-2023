@@ -16,7 +16,7 @@ const Hero = () => {
             <div className="gap-4 pb-2 relative z-30">
               <div className="flex items-center justify-between">
                 <div className="bg-[#ffc220] w-[7.5rem] flex items-center justify-center h-[2.5rem] rounded-full">
-                  <p className="font-bold text-[16px]">BUY NOW</p>
+                  <a href="/" className="font-bold text-[16px]">BUY NOW</a>
                 </div>
                 <div className="h-full flex items-center ">
                   <p className="font-bold text-[26px]">$34.99</p>
@@ -41,7 +41,7 @@ const Hero = () => {
             <div className="gap-4 pb-2 relative z-30">
               <div className="flex items-center justify-between">
                 <div className="bg-[#ffc220] w-[7.5rem] flex items-center justify-center h-[2.5rem] rounded-full">
-                  <p className="font-bold text-[16px]">BUY NOW</p>
+                  <a href="/" className="font-bold text-[16px]">BUY NOW</a>
                 </div>
                 <div className="h-full flex items-center ">
                   <p className="font-bold text-[26px]">$34.99</p>
@@ -65,7 +65,7 @@ const Hero = () => {
             <div className="  gap-4 pb-2 relative z-30">
               <div className="flex items-center justify-between">
                 <div className="bg-[#ffc220] w-[7.5rem] flex items-center justify-center h-[2.5rem] rounded-full">
-                  <p className="font-bold text-[16px]">BUY NOW</p>
+                  <a href="/" className="font-bold text-[16px]">BUY NOW</a>
                 </div>
                 <div className="h-full flex items-center ">
                   <p className="font-bold text-[26px]">$34.99</p>
