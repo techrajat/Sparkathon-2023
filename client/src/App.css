@@ -115,3 +115,13 @@
 }
 
 /* Hero section starts */
+
+/* Deals section starts */
+
+@media (max-width: 768px) {
+  .deal{
+    width: 155px;
+  }
+}
+
+/* Deals section starts */
