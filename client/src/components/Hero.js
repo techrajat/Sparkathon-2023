@@ -5,7 +5,7 @@ import Deals from "./Deals";
 const Hero = () => {
   return (
     <div className="hero">
-      <div className="flex flex-col md:flex-row items-center justify-between md:w-max xl:w-[70vw] mx-auto gap-5 mt-5">
+      <div className="flex flex-col md:flex-row items-center justify-between md:w-max xl:w-[70vw] mx-auto gap-4 pt-3">
         {/* Fist Deal */}
         <div className="w-4/5 h-[35rem] offer md:w-[30vw] relative rounded-[1rem] mt-4 mb-4">
           <img src={laptop} alt="" className="absolute object-cover top-20 rounded-[1.8rem]" />
