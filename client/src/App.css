@@ -1,0 +1,106 @@
+.mobileView{
+    display: none;
+}
+
+.searchDiv{
+  margin: 17px;
+}
+
+@media (max-width: 768px) {
+    .desktopView{
+        display: none;
+    }
+    .mobileView{
+        display: block;
+    }
+    #searchBar{
+      width: 195px;
+    }
+    .searchDiv{
+      margin: 0;
+    }
+}
+
+
+.mobile-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0071dc;
+    padding: 10px;
+    color: white;
+  }
+  
+  .hamburger-icon {
+    cursor: pointer;
+    z-index: 2;
+    height: 34px;
+    margin-right: 20px;
+  }
+  
+  .hamburger {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+  
+  .hamburger span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+  
+  .hamburger.open span:nth-child(1) {
+    transform: rotate(-45deg) translate(-4px, 7px);
+  }
+  
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger.open span:nth-child(3) {
+    transform: rotate(45deg) translate(-4px, -7px);
+  }
+  
+  .sidebar {
+    width: 64%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    background-color: #454545;
+    transition: left 0.3s ease-in-out;
+    z-index: 1;
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  
+  .sidebar-content {
+    padding: 80px 20px 20px 20px;
+  }
+  
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar-item:hover {
+    background-color: #06529a;
+  }
+  
+  .sidebar-icon {
+    font-size: 20px;
+  }
+  

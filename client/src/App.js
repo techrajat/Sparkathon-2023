@@ -1,10 +1,20 @@
-import './App.css';
+import Deals from "./components/Deals";
+import Footer from "./components/Footer";
+import Hero from "./components/Hero";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div>
-      <h1>Hi there , I am into the project</h1>
-      <p> From branch named initial </p>
+    <div className="bg-[#e6f1fc]">
+      {/* Navbar */}
+      <Navbar />
+      {/* Hero */}
+      <Hero />
+      {/* Deals */}
+      <Deals />
+      {/* For You */}
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
