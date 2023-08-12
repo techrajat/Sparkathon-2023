@@ -1,55 +1,33 @@
-import React from 'react';
-import "../App.css"
-import jacket2 from "../assets/2.jpg";
+import React, { useState, useEffect } from 'react';
+import SearchCard from './SearchCard';
 
 function SearchResult() {
-    return (
-        <div id="searchResult">
-            <div className="card" style={{width: 18+'rem'}}>
-                <a href="/">
-                    <img id="searchImage" src={jacket2} className="card-img-top" alt="..." style={{height: 350+'px'}} />
-                    <div class="card-body">
-                        <span>&#8377;100</span>
-                        <h5 className="card-title">Card title</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </a>
-            </div>
-            
-            <div className="card" style={{width: 18+'rem'}}>
-                <a href="/">
-                    <img id="searchImage" src={jacket2} className="card-img-top" alt="..." style={{height: 350+'px'}} />
-                    <div class="card-body">
-                        <span>&#8377;100</span>
-                        <h5 className="card-title">Card title</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </a>
-            </div>
+    const [items, setItems] = useState([]);
 
-            <div className="card" style={{width: 18+'rem'}}>
-                <a href="/">
-                    <img id="searchImage" src={jacket2} className="card-img-top" alt="..." style={{height: 350+'px'}} />
-                    <div class="card-body">
-                        <span>&#8377;100</span>
-                        <h5 className="card-title">Card title</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </a>
-            </div>
+    const fetchResult=async()=>{
+        const str = localStorage.getItem('searchStr');
+        const response = await fetch("http://127.0.0.1:8000/search", {
+            method: "POST",
+            headers: {"Content-Type": "application/x-www-form-urlencoded"},
+            body: `searchStr=${encodeURIComponent(str)}`
+        });
+        if(response.status === 200){
+            const results = await response.json();
+            setItems(results.result);
+        }
+    };
 
-            <div className="card" style={{width: 18+'rem'}}>
-                <a href="/">
-                    <img id="searchImage" src={jacket2} className="card-img-top" alt="..." style={{height: 350+'px'}} />
-                    <div class="card-body">
-                        <span>&#8377;100</span>
-                        <h5 className="card-title">Card title</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    )
+    useEffect(()=>{
+        fetchResult();
+    }, [items]);
+
+  return (
+    <div id="searchResult">
+      {items.map((element)=>{
+        return <SearchCard title={element.prod_name} price={element.price} desc={element.index_group_name} image={`data:image/jpeg;base64,${element.image}`} />
+      })}
+    </div>
+  )
 }
 
 export default SearchResult;

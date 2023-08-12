@@ -134,6 +134,7 @@
 #searchResult{
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
   margin-top: 20px;
@@ -151,6 +152,10 @@
 
 .card-title{
   margin-top: 10px;
+}
+
+.card-title, .card-text{
+  color: #837777;
 }
 
 /* Search result section ends */
