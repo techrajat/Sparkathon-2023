@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import SearchCard from './SearchCard';
+import { useNavigate } from 'react-router-dom';
 
-function SearchResult() {
+function SearchResult(props) {
+    const navigate = useNavigate();
     const [items, setItems] = useState([]);
 
     const fetchResult=async()=>{
@@ -19,12 +21,19 @@ function SearchResult() {
 
     useEffect(()=>{
         fetchResult();
-    }, [items]);
+    }, [props.newSearch]);
+
+    const [itemClicked, setItemClicked] = useState(false);
+    useEffect(()=>{
+      if(itemClicked)
+        navigate('/itemdesc');
+      //eslint-disable-next-line
+    }, [itemClicked]);
 
   return (
     <div id="searchResult">
       {items.map((element)=>{
-        return <SearchCard title={element.prod_name} price={element.price} desc={element.index_group_name} image={`data:image/jpeg;base64,${element.image}`} />
+        return <SearchCard key={element.article_id} article_id={element.article_id} title={element.prod_name} price={element.price} desc={element.index_group_name} image={`data:image/jpeg;base64,${element.image}`} setItemClicked={setItemClicked} />
       })}
     </div>
   )
