@@ -31,7 +31,7 @@ function SearchResult(props) {
     }, [itemClicked]);
 
   return (
-    <div id="searchResult">
+    <div className="searchResult">
       {items.map((element)=>{
         return <SearchCard key={element.article_id} article_id={element.article_id} title={element.prod_name} price={element.price} desc={element.index_group_name} image={`data:image/jpeg;base64,${element.image}`} setItemClicked={setItemClicked} />
       })}

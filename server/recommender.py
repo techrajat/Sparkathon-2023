@@ -8,11 +8,11 @@ indices = pd.Series(articles.index, index=articles['article_id']).drop_duplicate
 with open('recommender.pkl', 'rb') as file:
     cos_sim = pickle.load(file)
 
-# Method to give recommendations :-
-def recommendations(article_id):
+# Method to give top n recommendations :-
+def recommendations(article_id, n):
     i = indices[article_id]
     sim_scores = list(enumerate(cos_sim[i]))
     sim_scores.sort(key=lambda x: x[1], reverse=True)
-    sim_scores = sim_scores[:10]
+    sim_scores = sim_scores[:n]
     article_indices = [score[0] for score in sim_scores]
     return articles['article_id'].iloc[article_indices].values
