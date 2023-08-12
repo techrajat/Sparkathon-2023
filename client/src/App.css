@@ -131,7 +131,7 @@
 
 /* Search result section starts */
 
-#searchResult{
+.searchResult{
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -164,12 +164,13 @@
 
 /* Search result section ends */
 
-/* Search result section starts */
+/* Product description section starts */
 
 .desc{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding: 50px;
 }
 
 .showItemImg{
@@ -181,11 +182,9 @@
 }
 
 .addToCart{
-  position: relative;
-  top: 30px;
   padding: 20px;
   width: 326px;
-  height: 350px;
+  border: none;
 }
 
 .addToCart .group{
@@ -217,6 +216,11 @@
 }
 
 @media (max-width: 768px) {
+  .addToCart{
+    border: 1px solid rgb(225, 225, 225);
+    margin-top: 30px;
+  }
+
   .showItemImg img{
     margin: auto;
     height: 500px;
@@ -228,4 +232,64 @@
   }
 }
 
-/* Search result section ends */
+/* Product description section ends */
+
+/* Cheaper items begins */
+
+.cheaperItems{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cheap{
+  width: 200px;
+  height: 500px;
+  margin: 30px;
+  border: none;
+}
+
+.cheap img{
+  width: 200px;
+  height: 300px;
+  margin-bottom: 10px;
+}
+
+.cheap .price{
+  font-weight: bold;
+  font-size: larger;
+}
+
+.cheap .card-title{
+  color: grey;
+  font-size: large;
+  margin-top: 10px;
+}
+
+#cheaperItems{
+  margin: 50px 0 30px 0;
+}
+
+#cheaperHead{
+  margin-left: 70px;
+  font-weight: bold;
+  font-size: 22px;
+  text-decoration-line: underline;
+}
+
+.cheap:hover{
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  #cheaperItems{
+    text-align: center;
+  }
+  #cheaperHead{
+    margin-left: 0;
+    font-size: 20px;
+  }  
+}
+
+/* Cheaper items ends */

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [newSearch, setNewSearch] = useState(0);
+  const [reloadDesc, setReloadDesc] = useState(0);
 
   return (
     <div>
@@ -15,7 +16,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Hero />}></Route>
           <Route exact path='/search' element={<SearchResult newSearch={newSearch} />}></Route>
-          <Route exact path='/itemdesc' element={<ItemDesc />}></Route>
+          <Route exact path='/itemdesc' element={<ItemDesc key={reloadDesc} reloadDesc={reloadDesc} setReloadDesc={setReloadDesc} />}></Route>
         </Routes>
       </Router>
     </div>
