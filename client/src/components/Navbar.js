@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../App.css"
 import logo from "../assets/logo1.svg";
 import logo2 from "../assets/logo.png";
-import { FaLayerGroup } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 import { HiUserGroup } from "react-icons/hi";
 import { GoSearch } from "react-icons/go";
 import { MdLogin, MdLogout } from "react-icons/md";
@@ -11,7 +11,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsPhone } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = (props) => {
   const navigate = useNavigate();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,10 +22,11 @@ const Navbar = () => {
 
   const handleSearch=async(event)=>{
       event.preventDefault();
-      let str = document.getElementById('searchBar').value;
+      const str = document.getElementById('searchBar').value;
       document.getElementById('searchBar').value = null;
       if(str){
         localStorage.setItem('searchStr', str);
+        props.setNewSearch(props.newSearch + 1);
         navigate('/search');
       }
   };
@@ -46,7 +47,7 @@ const Navbar = () => {
         <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
           <div className="sidebar-content">
             <div className="sidebar-item">
-              <p>Sections</p>
+              <a href="/">Home</a>
             </div>
             <div className="sidebar-item">
               <p>Partners</p>
@@ -71,8 +72,8 @@ const Navbar = () => {
           </div>
 
           <div className="md:flex items-center gap-2 hidden hover:bg-[#06529a] p-3 rounded-full">
-            <FaLayerGroup className="text-[17px]" />
-            <p className="text-[16px] font-semibold">Sections</p>
+            <FaHome className="text-[17px]" />
+            <a href="/" className="text-[16px] font-semibold">Home</a>
           </div>
           <div className="md:flex hidden  items-center gap-2 hover:bg-[#06529a] p-3 rounded-full ">
             <HiUserGroup className="text-[20px]" />

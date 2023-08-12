@@ -34,7 +34,7 @@
   
   .hamburger-icon {
     cursor: pointer;
-    z-index: 2;
+    z-index: 2000;
     height: 34px;
     margin-right: 20px;
   }
@@ -77,7 +77,7 @@
     left: -100%;
     background-color: #454545;
     transition: left 0.3s ease-in-out;
-    z-index: 1;
+    z-index: 1000;
   }
   
   .sidebar.open {
@@ -114,7 +114,7 @@
 }
 
 .offer, .offer-detail{
-  height: 430px;
+  height: 440px;
 }
 
 /* Hero section ends */
@@ -140,22 +140,92 @@
   margin-top: 20px;
 }
 
-.card{
+.suggestions{
   margin: 30px;
   border: none;
 }
 
-.card span{
+.suggestions:hover{
+  cursor: pointer;
+}
+
+.suggestions span{
   font-weight: bold;
   font-size: larger;
 }
 
-.card-title{
+.suggestions .card-title{
   margin-top: 10px;
 }
 
-.card-title, .card-text{
+.suggestions .card-title, .suggestions .card-text{
   color: #837777;
+}
+
+/* Search result section ends */
+
+/* Search result section starts */
+
+.desc{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.showItemImg{
+  width: 500px;
+}
+
+.showItemImg img{
+  width: 320px;
+}
+
+.addToCart{
+  position: relative;
+  top: 30px;
+  padding: 20px;
+  width: 326px;
+  height: 350px;
+}
+
+.addToCart .group{
+  margin: 5px 0 10px 0;
+  color: grey;
+}
+
+.addToCart .card-title{
+  font-weight: bold;
+  font-size: larger;
+}
+
+.addToCart .price{
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.addToCart .card-text{
+  margin-top: 15px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(228, 228, 228);
+}
+
+.custom-btn {
+  margin-top: 20px;
+  background-color: #007bff;
+  border-color: #007bff;
+  width: 130px;
+}
+
+@media (max-width: 768px) {
+  .showItemImg img{
+    margin: auto;
+    height: 500px;
+  }
+
+  .addToCart{
+    width: 270px;
+    height: 350px;
+  }
 }
 
 /* Search result section ends */

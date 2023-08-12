@@ -27,7 +27,7 @@ const Deals = () => {
     <div className="w-full flex justify-center pb-12">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:w-max xl:w-[70vw] gap-4 mt-4 mx-auto">
         {cards.map((card) => (
-          <Card photo={card.photo} title={card.title} price={card.price} />
+          <Card photo={card.photo} title={card.title} />
         ))}
       </div>
     </div>
