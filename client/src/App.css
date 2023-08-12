@@ -293,3 +293,35 @@
 }
 
 /* Cheaper items ends */
+
+/* Registration form begins */
+
+#regForm{
+  padding: 30px;
+}
+
+#regHead{
+  font-size: x-large;
+  color: #0071dc;
+  text-decoration-line: underline;
+  margin-bottom: 20px;
+}
+
+.regWarn, .logWarn{
+  margin-top: 30px;
+  color: red;
+  font-size: larger;
+}
+
+#regForm button{
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+@media(width >= 992px){
+  #regForm{
+      margin-top: 20px;
+  }
+}
+
+/* Registration form ends */
