@@ -20,6 +20,10 @@ const Navbar = (props) => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const registration=()=>{
+    navigate('/register');
+  };
+
   const handleSearch=async(event)=>{
       event.preventDefault();
       const str = document.getElementById('searchBar').value;
@@ -54,11 +58,11 @@ const Navbar = (props) => {
             </div>
             <div className="sidebar-item">
               <MdLogin className="sidebar-icon" />
-              <p>Register</p>
+              <a href="/register" onClick={registration}>Register</a>
             </div>
             <div className="sidebar-item">
               <MdLogout className="sidebar-icon" />
-              <p>Sign In</p>
+              <a href="/login">Sign In</a>
             </div>
           </div>
         </div>
@@ -94,11 +98,11 @@ const Navbar = (props) => {
         <div className="flex  items-center gap-x-2">
           <div className="flex items-center gap-2 hover:bg-[#06529a] p-3 rounded-full desktopView">
             <MdLogin className="text-[17px] rotate-90" />
-            <p className="text-[16px] font-semibold">Register</p>
+            <a href="/register" className="text-[16px] font-semibold" onClick={registration}>Register</a>
           </div>
           <div className="flex items-center gap-2 hover:bg-[#06529a] p-3 rounded-full whitespace-nowrap desktopView">
             <MdLogout className="text-[20px] -rotate-90" />
-            <p className="text-[16px] font-semibold">Sign in</p>
+            <a href="/login" className="text-[16px] font-semibold">Sign in</a>
           </div>
           <div className="hover:bg-[#06529a] p-3 rounded-full">
             <AiOutlineShoppingCart className="w-7 h-7" />

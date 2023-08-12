@@ -13,8 +13,8 @@ collection = mydb['mycollection']
 import base64
 
 # Register the blueprints :-
-# import routes.search as search
-# app.register_blueprint(search.search_bp)
+import routes.users as users
+app.register_blueprint(users.users_bp)
 
 import search_result
 import recommender

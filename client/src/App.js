@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import SearchResult from './components/SearchResult';
 import ItemDesc from './components/ItemDesc';
+import Registration from './components/Registration';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route exact path='/' element={<Hero />}></Route>
           <Route exact path='/search' element={<SearchResult newSearch={newSearch} />}></Route>
           <Route exact path='/itemdesc' element={<ItemDesc key={reloadDesc} reloadDesc={reloadDesc} setReloadDesc={setReloadDesc} />}></Route>
+          <Route exact path='/register' element={<Registration />}></Route>
         </Routes>
       </Router>
     </div>
