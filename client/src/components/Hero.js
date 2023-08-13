@@ -5,7 +5,7 @@ import Offer from "./Offer";
 
 const Hero = (props) => {
   const [offers, setoffers] = useState([]);
-  const [deals, setDeals] = useState([]); //
+  const [deals, setDeals] = useState([]);
 
   const getOffers = async () => {
     let response;
