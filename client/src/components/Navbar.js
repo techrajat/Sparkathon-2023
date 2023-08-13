@@ -14,6 +14,13 @@ import { Link, useNavigate } from "react-router-dom";
 const Navbar = (props) => {
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    if (localStorage.getItem('token')){
+      props.setIsLogin(true);
+    }
+    // eslint-disable-next-line
+  }, []);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -33,7 +40,7 @@ const Navbar = (props) => {
       props.setNewSearch(props.newSearch + 1);
       const response = await fetch("http://127.0.0.1:8000/setstring", {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/x-www-form-urlencoded",
           "Authorization": localStorage.getItem('token')
         },
@@ -64,8 +71,6 @@ const Navbar = (props) => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('token'))
-      props.setIsLogin(true);
     if (props.isLogin) {
       if (window.innerWidth > 768) {
         document.querySelector('.loginLink').style.display = 'none';
@@ -110,6 +115,28 @@ const Navbar = (props) => {
     props.setIsLogin(false);
     localStorage.removeItem('token');
   };
+
+  const findItemsCart=async()=>{
+    const response = await fetch("http://127.0.0.1:8000/numcart", {
+      method: 'GET',
+      headers: { 'Authorization': localStorage.getItem('token') }
+    });
+    if (response.status === 200) {
+      const jsonRes = await response.json();
+      document.getElementById('numItems').innerHTML = jsonRes.numsItems;
+    }
+  };
+
+  useEffect(()=>{
+    if(!props.isLogin){
+      document.getElementById('numItems').style.display = 'none';
+    }
+    else{
+      document.getElementById('numItems').style.display = 'block';
+      findItemsCart();
+    }
+    // eslint-disable-next-line
+  }, [props.isLogin, props.numItemsCart]);
 
   return (
     <div className="">
@@ -201,8 +228,9 @@ const Navbar = (props) => {
             <FaHeart className="myIcon text-[20px]" style={{ display: 'none' }} />
             <Link to="/register" className="register text-[16px] font-semibold" onClick={registration}>Register</Link>
           </div>
-          <div className="hover:bg-[#06529a] p-3 rounded-full">
+          <div className="hover:bg-[#06529a] p-3 rounded-full relative">
             <AiOutlineShoppingCart className="w-7 h-7" />
+            <span class="absolute top-2 right-0 transform translate-x-[-50%] translate-y-0.1 bg-red-500 text-white rounded-full px-1.5 py-0.5 text-xs" id="numItems"></span>
           </div>
         </div>
       </div>

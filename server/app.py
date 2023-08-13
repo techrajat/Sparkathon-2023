@@ -24,6 +24,9 @@ app.register_blueprint(users.users_bp)
 import routes.promotions as promotions
 app.register_blueprint(promotions.promotions_bp)
 
+import routes.buy as buy
+app.register_blueprint(buy.buy_bp)
+
 import search_result
 import recommender
 

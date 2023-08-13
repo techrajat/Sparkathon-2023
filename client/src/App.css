@@ -243,6 +243,7 @@
 
 @media (max-width: 768px) {
   .addToCart{
+    width: 270px;
     border: 1px solid rgb(225, 225, 225);
     margin-top: 30px;
   }
@@ -250,11 +251,6 @@
   .showItemImg img{
     margin: auto;
     height: 500px;
-  }
-
-  .addToCart{
-    width: 270px;
-    height: 350px;
   }
 }
 
