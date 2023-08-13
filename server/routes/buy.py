@@ -33,3 +33,17 @@ def numcart():
             return {"numsItems": len(list(items))}, 200
     except:
         return {"error": "Server error"}, 400
+    
+# Endpoint to check whether a given item is present in the cart or not :-
+@buy_bp.route("/checkcart", methods=['POST'])
+def checkcart():
+    try:
+        user = request.environ['user']
+        article_id = request.form['article_id']
+        item = collection.find_one({'user_id': user['_id'], 'article_id': int(article_id)})
+        if not item:
+            return {"result": "Item is not present in cart"}, 400
+        else:
+            return {"result": "Item is present in cart"}, 200
+    except:
+        return {"error": "Server error"}, 500
