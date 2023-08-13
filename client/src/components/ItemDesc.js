@@ -31,6 +31,7 @@ function ItemDesc(props) {
                 Best seller
             </span>
             <span className="group">{item.perceived_colour_value_name} {item.perceived_colour_master_name} {item.department_name}</span>
+            <span className="gender">{item.index_group_name}</span>
             <h5 className="card-title">{item.prod_name}</h5>
             <span className="price">&#8377;{item.price}</span>
             <p className="card-text">{item.detail_desc}</p>

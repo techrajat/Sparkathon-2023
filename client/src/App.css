@@ -124,6 +124,20 @@
   height: 440px;
 }
 
+.offer img{
+  height: 224px;
+  width: 283px;
+}
+
+@media (max-width: 768px) {
+  .offer{
+    margin-bottom: 0;
+  }
+  .offer img{
+    width: 307px;
+  }
+}
+
 /* Hero section ends */
 
 /* Deals section starts */
@@ -195,7 +209,12 @@
 }
 
 .addToCart .group{
-  margin: 5px 0 10px 0;
+  margin: 5px 0 0 0;
+  color: grey;
+}
+
+.gender{
+  margin: 5px 0 15px 0;
   color: grey;
 }
 

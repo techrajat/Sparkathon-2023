@@ -20,6 +20,9 @@ import base64
 import routes.users as users
 app.register_blueprint(users.users_bp)
 
+import routes.promotions as promotions
+app.register_blueprint(promotions.promotions_bp)
+
 import search_result
 import recommender
 
