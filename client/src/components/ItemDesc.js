@@ -46,6 +46,40 @@ function ItemDesc(props) {
     }
   };
 
+  const getCartItem=async()=>{
+    const data = await fetch("http://127.0.0.1:8000/checkcart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": localStorage.getItem('token')
+      },
+      body: `article_id=${encodeURIComponent(item['article_id'])}`
+    });
+    if(data.status === 200){
+      const response = await fetch("http://127.0.0.1:8000/numcart", {
+        method: 'GET',
+        headers: { 'Authorization': localStorage.getItem('token') }
+      });
+      if (response.status === 200) {
+        const jsonRes = await response.json();
+        document.getElementById('addCartOption').innerHTML = `View cart (${jsonRes.numsItems})`;
+      }
+      else{
+        document.getElementById('addCartOption').innerHTML = "Add to cart";
+      }
+    }
+  };
+
+  useEffect(()=>{
+    if(props.isLogin){
+      getCartItem();
+    }
+    else{
+      document.getElementById('addCartOption').innerHTML = "Add to cart";
+    }
+    // eslint-disable-next-line
+  }, [props.isLogin, props.numItemsCart]);
+
   return (
     <div>
       <div className="desc">
@@ -61,7 +95,7 @@ function ItemDesc(props) {
           <h5 className="card-title">{item.prod_name}</h5>
           <span className="price">&#8377;{item.price}</span>
           <p className="card-text">{item.detail_desc}</p>
-          <button type="button" className="btn btn-primary custom-btn rounded-5" onClick={addToCart}>Add to cart</button>
+          <button type="button" id="addCartOption" className="btn btn-primary custom-btn rounded-5" onClick={addToCart}>Add to cart</button>
         </div>
       </div>
       <CheaperItems reloadDesc={props.reloadDesc} setReloadDesc={props.setReloadDesc} />
