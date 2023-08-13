@@ -5,6 +5,10 @@ app = Flask(__name__)
 from flask_cors import CORS
 CORS(app)
 
+# Calling middleware :-
+import middleware.middleware as middleware
+app.wsgi_app = middleware.AuthenticationMiddleware(app.wsgi_app)
+
 import pymongo
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient['mydatabase']
