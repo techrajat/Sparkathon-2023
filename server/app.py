@@ -13,6 +13,7 @@ import pymongo
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient['mydatabase']
 collection = mydb['mycollection']
+search_collection = mydb['searchHistory']
 
 import base64
 
@@ -31,7 +32,7 @@ import recommender
 def search():
     try:
         searchStr = request.form['searchStr']
-        results = search_result.search_result(searchStr)
+        results = search_result.search_result(searchStr, 50)
         if not len(results):
             return {"error": "No products found"}, 400
         results = results.tolist()
@@ -88,6 +89,44 @@ def cheaper():
             if len(cheaperItems) >= 8:
                 break
         return {"result": cheaperItems}, 200
+    except:
+        return {"error": "Server error"}, 500
+
+# Endpoint to find products according to the search history of users :-
+@app.route('/promotion')
+def promotion():
+    try:
+        user = request.environ['user']
+        if not user:
+            return {"error": "User not found"}, 400
+        try:
+            search_string = search_collection.find_one({'user_id': user['_id']})
+            search_string = search_string['search_string']
+            results = search_result.search_result(search_string, 200)
+            if not len(results):
+                return {"error": "No products found"}, 400
+            results = results.tolist()
+            products = []
+            for article_id in results:
+                product = collection.find_one({"article_id": article_id}, {"_id": 0})
+                if product:
+                    product["image"] = base64.b64encode(product["image"]).decode('utf-8')
+                    products.append(product)
+                else:
+                    print(article_id, " not found")
+            if not len(products):
+                return {"error": "No products found"}, 400
+            return {"result": products}, 200
+        except:  # If a new user makes the request then return 50 random products
+            try:
+                items = collection.find({}, {'_id': 0}).limit(50)
+                products = []
+                for item in list(items):
+                    item["image"] = base64.b64encode(item["image"]).decode('utf-8')
+                    products.append(item)
+                return {"result": products}, 200
+            except:
+                return {"error": "Server error"}, 500
     except:
         return {"error": "Server error"}, 500
 

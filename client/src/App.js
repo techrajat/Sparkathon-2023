@@ -17,7 +17,7 @@ function App() {
       <Router>
         <Navbar newSearch={newSearch} setNewSearch={setNewSearch} isLogin={isLogin} setIsLogin={setIsLogin} />
         <Routes>
-          <Route exact path='/' element={<Hero />}></Route>
+          <Route exact path='/' element={<Hero isLogin={isLogin} />}></Route>
           <Route exact path='/search' element={<SearchResult newSearch={newSearch} />}></Route>
           <Route exact path='/itemdesc' element={<ItemDesc key={reloadDesc} reloadDesc={reloadDesc} setReloadDesc={setReloadDesc} />}></Route>
           <Route exact path='/register' element={<Registration />}></Route>
