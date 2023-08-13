@@ -31,6 +31,17 @@ const Navbar = (props) => {
     if (str) {
       localStorage.setItem('searchStr', str);
       props.setNewSearch(props.newSearch + 1);
+      const response = await fetch("http://127.0.0.1:8000/setstring", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Authorization": localStorage.getItem('token')
+        },
+        body: `str=${encodeURIComponent(str)}`
+      });
+      if (response.status === 200) {
+        console.log("Search string updated")
+      }
       navigate('/search');
     }
   };
@@ -53,7 +64,7 @@ const Navbar = (props) => {
   };
 
   useEffect(() => {
-    if(localStorage.getItem('token'))
+    if (localStorage.getItem('token'))
       props.setIsLogin(true);
     if (props.isLogin) {
       if (window.innerWidth > 768) {
@@ -95,7 +106,7 @@ const Navbar = (props) => {
     // eslint-disable-next-line
   }, [props.isLogin]);
 
-  const logout=()=>{
+  const logout = () => {
     props.setIsLogin(false);
     localStorage.removeItem('token');
   };
@@ -131,12 +142,12 @@ const Navbar = (props) => {
             </div>
             <div className="sidebar-item">
               <MdLogin className="regIconSide text-[17px] rotate-90" />
-              <FaHeart className="myIconSide text-[18px]" style={{display: 'none'}} />
+              <FaHeart className="myIconSide text-[18px]" style={{ display: 'none' }} />
               <Link to="/register" onClick={registration && toggleSidebar} className="registerSide">Register</Link>
             </div>
-            <div className="logoutLinkSide sidebar-item" style={{display: 'none'}}>
+            <div className="logoutLinkSide sidebar-item" style={{ display: 'none' }}>
               <MdLogout className="usern sidebar-icon" />
-              <span style={{cursor: 'pointer'}} onClick={logout}>Logout</span>
+              <span style={{ cursor: 'pointer' }} onClick={logout}>Logout</span>
             </div>
           </div>
         </div>
@@ -181,13 +192,13 @@ const Navbar = (props) => {
             </a>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <li>
-                <span className="dropdown-item" style={{cursor: 'pointer'}} onClick={logout}>Logout</span>
+                <span className="dropdown-item" style={{ cursor: 'pointer' }} onClick={logout}>Logout</span>
               </li>
             </ul>
           </div>
           <div className="flex items-center gap-2 hover:bg-[#06529a] p-3 rounded-full desktopView">
             <MdLogin className="regIcon text-[17px] rotate-90" />
-            <FaHeart className="myIcon text-[20px]" style={{display: 'none'}} />
+            <FaHeart className="myIcon text-[20px]" style={{ display: 'none' }} />
             <Link to="/register" className="register text-[16px] font-semibold" onClick={registration}>Register</Link>
           </div>
           <div className="hover:bg-[#06529a] p-3 rounded-full">
