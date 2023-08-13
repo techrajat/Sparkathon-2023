@@ -3,12 +3,21 @@ import "../App.css";
 import Deals from "./Deals";
 import Offer from "./Offer";
 
-const Hero = () => {
+const Hero = (props) => {
   const [offers, setoffers] = useState([]);
-  const [deals, setDeals] = useState([]);
+  const [deals, setDeals] = useState([]); //
 
   const getOffers = async () => {
-    const response = await fetch("http://127.0.0.1:8000/general");
+    let response;
+    if(!props.isLogin){
+      response = await fetch("http://127.0.0.1:8000/general");
+    }
+    else{
+      response = await fetch("http://127.0.0.1:8000/promotion", {
+        method: "GET",
+        headers: {"Authorization": localStorage.getItem('token')}
+      });
+    }
     const jsonRes = await response.json();
     if (response.status === 200) {
       const newOffers = [];
@@ -18,8 +27,10 @@ const Hero = () => {
       jsonRes.result.splice(10, 1);
       newOffers.push(jsonRes.result[13]);
       jsonRes.result.splice(13, 1);
-      setoffers(offers.concat(newOffers));
-      setDeals(deals.concat(jsonRes.result));
+      setoffers(newOffers);
+      if(jsonRes.result.length < 50)
+        jsonRes.result = jsonRes.result.slice(-15)
+      setDeals(jsonRes.result);
     }
     else {
       console.log(jsonRes.error);
@@ -29,7 +40,7 @@ const Hero = () => {
   useEffect(()=>{
     getOffers();
   // eslint-disable-next-line
-  }, []);
+  }, [props.isLogin]);
 
   return (
     <div className="hero">
@@ -38,7 +49,7 @@ const Hero = () => {
           return <Offer article_id={element.article_id} prod_name={element.product_type_name} price={element.price} image={`data:image/jpeg;base64,${element.image}`} />
         })}
       </div>
-      <Deals deals={deals.slice(-15)} />
+      <Deals deals={deals} />
     </div>
   );
 };

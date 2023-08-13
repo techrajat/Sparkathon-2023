@@ -19,7 +19,6 @@ const Card = (props) => {
           {props.title.length <= 15 && props.title}
           {props.title.length > 15 && props.title.slice(0, 15) + "..."}
         </p>
-        <p className="text-center" style={{ color: 'grey' }}>{props.group}</p>
       </div>
     </div>
   );

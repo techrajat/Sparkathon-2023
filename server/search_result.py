@@ -2,7 +2,6 @@ import string
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import pandas as pd
-import pickle
 from sklearn.metrics.pairwise import cosine_similarity
 
 articles = pd.read_csv('articles.csv')
@@ -38,11 +37,11 @@ tfidf = TfidfVectorizer(analyzer=text_process)
 tfidf_matrix = tfidf.fit_transform(articles['combined_cols'])
 
 # Method for showing search results with a given description of the product :-
-def search_result(desc):
+def search_result(desc, n):
     search_tfidf = tfidf.transform([desc])
     cos_sim = cosine_similarity(search_tfidf, tfidf_matrix)
     sim_scores = list(enumerate(cos_sim[0]))
     sim_scores.sort(key=lambda x: x[1], reverse=True)
-    sim_scores = sim_scores[:50] # Get the top 50 results
+    sim_scores = sim_scores[:n] # Get the top n results
     article_indices = [score[0] for score in sim_scores]
     return articles['article_id'].iloc[article_indices].values
