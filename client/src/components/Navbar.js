@@ -114,6 +114,7 @@ const Navbar = (props) => {
   const logout = () => {
     props.setIsLogin(false);
     localStorage.removeItem('token');
+    navigate('/');
   };
 
   const findItemsCart = async () => {
