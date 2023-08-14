@@ -41,7 +41,7 @@ function ItemDesc(props) {
         console.log(jsonRes.success);
       }
       else {
-        console.log(jsonRes.error);
+        navigate('/checkout');
       }
     }
   };
@@ -53,7 +53,7 @@ function ItemDesc(props) {
         "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": localStorage.getItem('token')
       },
-      body: `article_id=${encodeURIComponent(item['article_id'])}`
+      body: `article_id=${encodeURIComponent(localStorage.getItem('selectedItem'))}`
     });
     if(data.status === 200){
       const response = await fetch("http://127.0.0.1:8000/numcart", {
