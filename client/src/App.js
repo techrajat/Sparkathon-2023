@@ -24,7 +24,7 @@ function App() {
           <Route exact path='/itemdesc' element={<ItemDesc key={reloadDesc} reloadDesc={reloadDesc} setReloadDesc={setReloadDesc} isLogin={isLogin} numItemsCart={numItemsCart} setNumItemsCart={setNumItemsCart} />}></Route>
           <Route exact path='/register' element={<Registration />}></Route>
           <Route exact path='/login' element={<Login setIsLogin={setIsLogin} />}></Route>
-          <Route exact path='/checkout' element={<Checkout />}></Route>
+          <Route exact path='/checkout' element={<Checkout isLogin={isLogin} numItemsCart={numItemsCart} />}></Route>
         </Routes>
       </Router>
     </div>
