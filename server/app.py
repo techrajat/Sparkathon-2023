@@ -69,7 +69,7 @@ def getItemDetails():
     except:
         return {"error": "Server error"}, 500
     
-# Endpoint to search for top 6 similar products which are cheaper than a given product :-
+# Endpoint to search for top 8 similar products which are cheaper than a given product :-
 @app.route("/cheaper", methods=['POST'])
 def cheaper():
     try:

@@ -14,8 +14,8 @@ import { Link, useNavigate } from "react-router-dom";
 const Navbar = (props) => {
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if (localStorage.getItem('token')){
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
       props.setIsLogin(true);
     }
     // eslint-disable-next-line
@@ -116,7 +116,7 @@ const Navbar = (props) => {
     localStorage.removeItem('token');
   };
 
-  const findItemsCart=async()=>{
+  const findItemsCart = async () => {
     const response = await fetch("http://127.0.0.1:8000/numcart", {
       method: 'GET',
       headers: { 'Authorization': localStorage.getItem('token') }
@@ -127,11 +127,11 @@ const Navbar = (props) => {
     }
   };
 
-  useEffect(()=>{
-    if(!props.isLogin){
+  useEffect(() => {
+    if (!props.isLogin) {
       document.getElementById('numItems').style.display = 'none';
     }
-    else{
+    else {
       document.getElementById('numItems').style.display = 'block';
       findItemsCart();
     }
@@ -229,8 +229,10 @@ const Navbar = (props) => {
             <Link to="/register" className="register text-[16px] font-semibold" onClick={registration}>Register</Link>
           </div>
           <div className="hover:bg-[#06529a] p-3 rounded-full relative">
-            <AiOutlineShoppingCart className="w-7 h-7" />
-            <span class="absolute top-2 right-0 transform translate-x-[-50%] translate-y-0.1 bg-red-500 text-white rounded-full px-1.5 py-0.5 text-xs" id="numItems"></span>
+            <Link to="/checkout">
+              <AiOutlineShoppingCart className="w-7 h-7" />
+              <span class="absolute top-2 right-0 transform translate-x-[-20%]  translate-y-0.1 bg-red-500 text-white rounded-full px-1.5 py-0.5 text-xs" id="numItems"></span>
+            </Link>
           </div>
         </div>
       </div>

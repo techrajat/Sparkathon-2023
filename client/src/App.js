@@ -5,6 +5,7 @@ import SearchResult from './components/SearchResult';
 import ItemDesc from './components/ItemDesc';
 import Registration from './components/Registration';
 import Login from './components/Login';
+import Checkout from './components/Checkout';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route exact path='/itemdesc' element={<ItemDesc key={reloadDesc} reloadDesc={reloadDesc} setReloadDesc={setReloadDesc} isLogin={isLogin} numItemsCart={numItemsCart} setNumItemsCart={setNumItemsCart} />}></Route>
           <Route exact path='/register' element={<Registration />}></Route>
           <Route exact path='/login' element={<Login setIsLogin={setIsLogin} />}></Route>
+          <Route exact path='/checkout' element={<Checkout />}></Route>
         </Routes>
       </Router>
     </div>
