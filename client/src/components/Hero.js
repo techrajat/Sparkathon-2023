@@ -45,8 +45,8 @@ const Hero = (props) => {
     <div className="hero">
       {props.isLogin && topPromotions.length > 0 && <div className="shadow-lg border rounded p-4 w-[95vw] mx-auto mb-5">
         <div className="flex justify-between">
-          <p className="mb-4 font-bold text-xl">Recent search recommendations</p>
-          <Link to="/searchrec" className="mb-4 font-bold text-xl" style={{ color: '#008080' }}>See more</Link>
+          <p className="mb-4 font-bold text-xl recentText">Recent search recommendations</p>
+          <Link to="/searchrec" className="mb-4 font-bold text-xl recentText" style={{ color: '#008080' }}>See more</Link>
         </div>
         <div className="flex flex-col md:flex-row items-center justify-between md:w-max xl:w-[70vw] mx-auto gap-4">
           {topPromotions.map((element) => (

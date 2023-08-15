@@ -26,7 +26,7 @@
   }
 
   #searchBar {
-    width: 195px;
+    width: 245px;
   }
 
   .searchDiv {
@@ -35,6 +35,10 @@
 
   .regIcon, .myIcon{
     margin: 0 8px 3px 0;
+  }
+
+  .logo{
+    display: none;
   }
 }
 
@@ -155,6 +159,10 @@
 
   .promo img, .offer img {
     width: 307px;
+  }
+
+  .recentText{
+    font-size: small;
   }
 }
 

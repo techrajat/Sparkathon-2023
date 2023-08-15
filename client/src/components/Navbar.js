@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../App.css"
-import logo from "../assets/logo1.svg";
-import logo2 from "../assets/logo.png";
+import "../App.css";
 import { FaHome, FaHeart, FaUser } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { GoSearch } from "react-icons/go";
@@ -179,11 +177,9 @@ const Navbar = (props) => {
 
         {/* Left */}
         <div className="flex  items-center gap-x-3 shrink-0">
-          <div className="hover:bg-[#06529a] p-2 rounded-full">
-            <img src={logo} alt="" className="desktopView h-12" />
-            <img src={logo2} alt="" className="mobileView h-8" />
+          <div className="p-2 rounded-full font-weight-bold fs-4 logo">
+            VALUEMART
           </div>
-
           <div className="md:flex items-center gap-2 hidden hover:bg-[#06529a] p-3 rounded-full">
             <FaHome className="text-[17px]" />
             <Link to="/" className="text-[16px] font-semibold">Home</Link>
@@ -196,7 +192,7 @@ const Navbar = (props) => {
         {/* Middle */}
         <div className="searchDiv relative lg:flex items-center flex-1">
           <form className="relative flex-1" onSubmit={handleSearch}>
-            <input type="search" placeholder="Search Walmart" id="searchBar" className="rounded-full py-1.5 pl-4 pr-10 outline-0 w-full pr-10 text-black" />
+            <input type="search" placeholder="Search here" id="searchBar" className="rounded-full py-1.5 pl-4 pr-10 outline-0 w-full pr-10 text-black" />
             <div className="absolute bg-[#ffc220] p-1.5 rounded-full right-1.5 top-1/2 transform -translate-y-1/2">
               <GoSearch className="text-black" />
             </div>
