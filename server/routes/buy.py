@@ -6,6 +6,7 @@ myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient['mydatabase']
 dataCollection = mydb['mycollection']
 collection = mydb['cart']
+storeCollection = mydb['store']
 
 import base64
 
@@ -66,5 +67,48 @@ def cartitems():
             else:
                 print(item['article_id'], "not found")
         return {"result": products}, 200
+    except:
+        return {"error": "Server error"}, 500
+    
+# Endpoint to store the products for in-store buying :-
+@buy_bp.route('/store', methods=['POST'])
+def store():
+    try:
+        user = request.environ['user']
+        if not user:
+            return {"error": "User not found"}, 400
+        items = request.form['items']
+        for item in items.split(','):
+            storeCollection.insert_one({'user_id': user['_id'], 'article_id': int(item)})
+        return {"success": "Items stored succesfully"}, 200
+    except:
+        return {"error": "Server error"}, 500
+    
+# Endpoint to retrieve the products for in-store buying :-
+@buy_bp.route('/getstore')
+def getstore():
+    try:
+        user = request.environ['user']
+        if not user:
+            return {"error": "User not found"}, 400
+        items = storeCollection.find({'user_id': user['_id']})
+        products = []
+        for item in list(items):
+            product = dataCollection.find_one({'article_id': item['article_id']}, {'_id': 0})
+            product["image"] = base64.b64encode(product["image"]).decode('utf-8')
+            products.append(product)
+        return {"result": products}, 200
+    except:
+        return {"error": "Server error"}, 500
+    
+# Endpoint to empty the user's cart :-
+@buy_bp.route('/emptycart')
+def emptycart():
+    try:
+        user = request.environ['user']
+        if not user:
+            return {"error": "User not found"}, 400
+        collection.delete_many({'user_id': user['_id']})
+        return {"success": "Cart emptied successfully"}, 200
     except:
         return {"error": "Server error"}, 500
