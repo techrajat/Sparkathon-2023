@@ -73,17 +73,15 @@ const Navbar = (props) => {
       if (window.innerWidth > 768) {
         document.querySelector('.loginLink').style.display = 'none';
         document.querySelector('.dropdown').style.display = 'block';
-        document.querySelector('.regIcon').style.display = 'none';
-        document.querySelector('.myIcon').style.display = 'block';
-        document.querySelector('.register').innerHTML = 'My Items';
+        document.querySelector('.register').style.display = 'none';
+        document.querySelector('.payment').style.display = 'block';
       }
       else {
         document.querySelector('.loginLinkSide').style.display = 'none';
         document.querySelector('.usernameSide').style.display = 'block';
-        document.querySelector('.regIconSide').style.display = 'none';
-        document.querySelector('.myIconSide').style.display = 'block';
         document.querySelector('.logoutLinkSide').style.display = 'block';
-        document.querySelector('.registerSide').innerHTML = 'My Items';
+        document.querySelector('.registerSide').style.display = 'none';
+        document.querySelector('.paymentSide').style.display = 'block';
       }
       getUsername();
     }
@@ -91,19 +89,16 @@ const Navbar = (props) => {
       if (window.innerWidth > 768) {
         document.querySelector('.dropdown').style.display = 'none';
         document.querySelector('.loginLink').style.display = 'block';
-        document.querySelector('.regIcon').style.display = 'block';
-        document.querySelector('.myIcon').style.display = 'none';
-        document.querySelector('.register').innerHTML = 'Register';
+        document.querySelector('.register').style.display = 'block';
+        document.querySelector('.payment').style.display = 'none';
       }
       else {
         document.querySelector('.usernameSide').style.display = 'none';
         document.querySelector('.loginLinkSide').style.display = 'block';
         document.querySelector('.dropdown').style.display = 'none';
-        document.querySelector('.regIconSide').style.display = 'block';
-        document.querySelector('.myIconSide').style.display = 'none';
         document.querySelector('.logoutLinkSide').style.display = 'none';
-        document.querySelector('.regIcon').style.display = 'block';
-        document.querySelector('.registerSide').innerHTML = 'Register';
+        document.querySelector('.registerSide').style.display = 'block';
+        document.querySelector('.paymentSide').style.display = 'none';
       }
     }
     // eslint-disable-next-line
@@ -166,10 +161,13 @@ const Navbar = (props) => {
               <FaUser className="usern text-[18px]" />
               <Link to="/login" onClick={toggleSidebar} className="nameSide"></Link>
             </div>
-            <div className="sidebar-item">
-              <MdLogin className="regIconSide text-[17px] rotate-90" />
-              <FaHeart className="myIconSide text-[18px]" style={{ display: 'none' }} />
-              <Link to="/register" onClick={registration && toggleSidebar} className="registerSide">Register</Link>
+            <div className="registerSide sidebar-item">
+              <MdLogin className="regIcon text-[17px] rotate-90" />
+              <Link to="/register" onClick={registration && toggleSidebar}>Register</Link>
+            </div>
+            <div className="paymentSide flex items-center gap-2 hover:bg-[#06529a] py-3 rounded-full desktopView">
+              <FaHeart className="myIcon text-[20px]" />
+              <Link to="/payment" className="text-[16px] font-semibold">My Items</Link>
             </div>
             <div className="logoutLinkSide sidebar-item" style={{ display: 'none' }}>
               <MdLogout className="usern sidebar-icon" />
@@ -222,10 +220,13 @@ const Navbar = (props) => {
               </li>
             </ul>
           </div>
-          <div className="flex items-center gap-2 hover:bg-[#06529a] p-3 rounded-full desktopView">
+          <div className="register flex items-center gap-2 hover:bg-[#06529a] p-3 rounded-full desktopView">
             <MdLogin className="regIcon text-[17px] rotate-90" />
-            <FaHeart className="myIcon text-[20px]" style={{ display: 'none' }} />
-            <Link to="/register" className="register text-[16px] font-semibold" onClick={registration}>Register</Link>
+            <Link to="/register" className="text-[16px] font-semibold" onClick={registration}>Register</Link>
+          </div>
+          <div className="payment flex items-center gap-2 hover:bg-[#06529a] p-3 rounded-full desktopView">
+            <FaHeart className="myIcon text-[17px]" />
+            <Link to="/payment" className="text-[16px] font-semibold">My Items</Link>
           </div>
           <div className="hover:bg-[#06529a] p-3 rounded-full relative">
             <Link to="/checkout">

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
 import CartItem from './CartItem';
+import { useNavigate } from 'react-router-dom';
 
 function Checkout(props) {
-    const [cartItems, setCartItems] = useState([]);
+    const navigate = useNavigate();
+
     const [numcart, setNumcart] = useState(0);
+    const [cartItems, setCartItems] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
-    const [amountDecreased, setAmountDecreased] = useState(0);
+    const [newAmount, setNewAmount] = useState(0);
 
     const getCartItems = async () => {
         let response = await fetch("http://127.0.0.1:8000/numcart", {
@@ -34,15 +37,17 @@ function Checkout(props) {
             else {
                 setCartItems(items);
                 let amt = 0, decreaseAmt = 0;
-                items.forEach((element)=>{
+                items.forEach((element) => {
                     amt += element.price;
                 });
+                localStorage.setItem('totalAmt', amt);
                 setTotalAmount(amt);
-                items.forEach((element)=>{
-                    if(!element.remaining_stock)
+                items.forEach((element) => {
+                    if (!element.remaining_stock)
                         decreaseAmt += element.price;
                 });
-                setAmountDecreased(decreaseAmt);
+                localStorage.setItem('newAmt', (amt - decreaseAmt));
+                setNewAmount(amt - decreaseAmt);
             }
         }
     };
@@ -52,21 +57,58 @@ function Checkout(props) {
         //eslint-disable-next-line
     }, [props.isLogin, props.numItemsCart]);
 
-    useEffect(()=>{
-        if(props.buyInStore){
-            document.querySelectorAll('.buyBtnStore').forEach((element)=>{
-                element.style.width = 200+'px';
-                element.innerHTML = "Continue to buy in-store";
-            });
-            if(totalAmount !== (totalAmount - amountDecreased)){
-                document.querySelectorAll('.originalAmt').forEach((element)=>{
-                    element.style.color = 'red';
-                    element.style.textDecoration = 'line-through red';
-                });
+    const storeItems = async () => {
+        let itemsToStore = [];
+        cartItems.forEach((element) => {
+            if (element.remaining_stock)
+                itemsToStore.push(element.article_id);
+        });
+        await fetch("http://127.0.0.1:8000/store", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Authorization": localStorage.getItem('token')
+            },
+            body: `items=${encodeURIComponent(itemsToStore.join(","))}`
+        });
+        await fetch("http://127.0.0.1:8000/emptycart", {
+            method: "GET",
+            headers: { "Authorization": localStorage.getItem('token') }
+        });
+        props.setNumItemsCart(0);
+        props.setBuyInStore(false);
+        navigate('/payment');
+    }
+
+    useEffect(() => {
+        if (props.buyInStore) {
+            if (window.innerWidth > 768) {
+                document.querySelector('.buyBtnStore').style.display = 'none';
+                document.querySelector('.buyBtnCnf').style.display = 'block';
+            }
+            else {
+                document.querySelector('.buyBtnStore2').style.display = 'none';
+                document.querySelector('.buyBtnCnf2').style.display = 'block';
+            }
+            if (parseInt(localStorage.getItem('totalAmt')) !== parseInt(localStorage.getItem('newAmt'))) {
+                if (window.innerWidth > 768) {
+                    document.querySelector('.originalAmt').style.color = 'red';
+                    document.querySelector('.originalAmt').style.textDecoration = 'line-through red';
+                }
+                else {
+                    document.querySelector('.originalAmt2').style.color = 'red';
+                    document.querySelector('.originalAmt2').style.textDecoration = 'line-through red';
+                }
             }
         }
+        else {
+            if (window.innerWidth > 768)
+                document.querySelector('.buyBtnCnf').style.display = 'none';
+            else
+                document.querySelector('.buyBtnCnf2').style.display = 'none';
+        }
         // eslint-disable-next-line
-    }, [props.buyInStore]);
+    }, [props.numItemsCart, props.buyInStore]);
 
     return (
         <div className="container checkout-container">
@@ -78,14 +120,17 @@ function Checkout(props) {
                             <h5 className="card-title text-center mb-7 bigger">Order Summary</h5>
                             <div className="d-flex justify-content-between align-items-center mb-8 p-3">
                                 <p className="total-amount font-weight-bold fs-5">Total amount</p>
-                                <p className="price fw-bold fs-5 text-success originalAmt">&#8377;{totalAmount}</p>
-                                {props.buyInStore === true && totalAmount !== (totalAmount - amountDecreased) && <p className="price fw-bold fs-5 text-success newAmount">&#8377;{totalAmount - amountDecreased}</p>}
+                                <p className="price fw-bold fs-5 text-success originalAmt2">&#8377;{totalAmount}</p>
+                                {props.buyInStore === true && totalAmount !== newAmount && <p className="price fw-bold fs-5 text-success newAmount">&#8377;{newAmount}</p>}
                             </div>
                             <div className="text-center">
                                 <button className="btn btn-primary btn-block buyBtn mb-3">Buy online</button>
                             </div>
                             <div className="text-center">
-                                <button className="btn btn-primary btn-block buyBtn" onClick={()=>{props.setBuyInStore(true)}}>Buy in-store</button>
+                                <button className="btn btn-primary btn-block buyBtn buyBtnStore2" onClick={() => { props.setBuyInStore(true) }}>Buy in-store</button>
+                            </div>
+                            <div className="text-center buyBtnCnf2">
+                                <button className="btn btn-primary btn-block buyBtn" style={{ width: 200 + 'px' }} onClick={storeItems}>Continue to buy in-store</button>
                             </div>
                         </div>
                     </div>
@@ -106,13 +151,16 @@ function Checkout(props) {
                             <div className="d-flex justify-content-between align-items-center mb-8 p-3">
                                 <p className="total-amount font-weight-bold fs-5">Total amount</p>
                                 <p className="price fw-bold fs-5 text-success originalAmt">&#8377;{totalAmount}</p>
-                                {props.buyInStore === true && totalAmount !== (totalAmount - amountDecreased) && <p className="price fw-bold fs-5 text-success newAmount">&#8377;{totalAmount - amountDecreased}</p>}
+                                {props.buyInStore === true && totalAmount !== newAmount && <p className="price fw-bold fs-5 text-success newAmount">&#8377;{newAmount}</p>}
                             </div>
                             <div className="text-center">
                                 <button className="btn btn-primary btn-block buyBtn mb-3">Buy online</button>
                             </div>
                             <div className="text-center">
-                                <button className="btn btn-primary btn-block buyBtn buyBtnStore" onClick={()=>{props.setBuyInStore(true)}}>Buy in-store</button>
+                                <button className="btn btn-primary btn-block buyBtn buyBtnStore" onClick={() => { props.setBuyInStore(true) }}>Buy in-store</button>
+                            </div>
+                            <div className="text-center buyBtnCnf">
+                                <button className="btn btn-primary btn-block buyBtn" style={{ width: 200 + 'px' }} onClick={storeItems}>Continue to buy in-store</button>
                             </div>
                         </div>
                     </div>
