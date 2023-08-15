@@ -6,6 +6,7 @@ function Checkout(props) {
     const [cartItems, setCartItems] = useState([]);
     const [numcart, setNumcart] = useState(0);
     const [totalAmount, setTotalAmount] = useState(0);
+    const [amountDecreased, setAmountDecreased] = useState(0);
 
     const getCartItems = async () => {
         let response = await fetch("http://127.0.0.1:8000/numcart", {
@@ -28,14 +29,20 @@ function Checkout(props) {
                 document.querySelector('.mobileCart').style.display = 'none';
                 document.querySelector('.deskCart').style.display = 'none';
                 document.querySelector('.cartItems').style.display = 'none';
+                document.querySelector('.cartItems').style.display = 'none';
             }
             else {
                 setCartItems(items);
-                let amt = 0;
+                let amt = 0, decreaseAmt = 0;
                 items.forEach((element)=>{
                     amt += element.price;
                 });
                 setTotalAmount(amt);
+                items.forEach((element)=>{
+                    if(!element.remaining_stock)
+                        decreaseAmt += element.price;
+                });
+                setAmountDecreased(decreaseAmt);
             }
         }
     };
@@ -44,6 +51,22 @@ function Checkout(props) {
         getCartItems();
         //eslint-disable-next-line
     }, [props.isLogin, props.numItemsCart]);
+
+    useEffect(()=>{
+        if(props.buyInStore){
+            document.querySelectorAll('.buyBtnStore').forEach((element)=>{
+                element.style.width = 200+'px';
+                element.innerHTML = "Continue to buy in-store";
+            });
+            if(totalAmount !== (totalAmount - amountDecreased)){
+                document.querySelectorAll('.originalAmt').forEach((element)=>{
+                    element.style.color = 'red';
+                    element.style.textDecoration = 'line-through red';
+                });
+            }
+        }
+        // eslint-disable-next-line
+    }, [props.buyInStore]);
 
     return (
         <div className="container checkout-container">
@@ -55,13 +78,14 @@ function Checkout(props) {
                             <h5 className="card-title text-center mb-7 bigger">Order Summary</h5>
                             <div className="d-flex justify-content-between align-items-center mb-8 p-3">
                                 <p className="total-amount font-weight-bold fs-5">Total amount</p>
-                                <p className="price fw-bold fs-5 text-success">&#8377;{totalAmount}</p>
+                                <p className="price fw-bold fs-5 text-success originalAmt">&#8377;{totalAmount}</p>
+                                {props.buyInStore === true && totalAmount !== (totalAmount - amountDecreased) && <p className="price fw-bold fs-5 text-success newAmount">&#8377;{totalAmount - amountDecreased}</p>}
                             </div>
                             <div className="text-center">
                                 <button className="btn btn-primary btn-block buyBtn mb-3">Buy online</button>
                             </div>
                             <div className="text-center">
-                                <button className="btn btn-primary btn-block buyBtn">Buy in-store</button>
+                                <button className="btn btn-primary btn-block buyBtn" onClick={()=>{props.setBuyInStore(true)}}>Buy in-store</button>
                             </div>
                         </div>
                     </div>
@@ -70,7 +94,7 @@ function Checkout(props) {
                 <div className="col-lg-8 cartItems">
                     <div className="product-list">
                         {cartItems.map((element) => {
-                            return <CartItem image={`data:image/jpeg;base64,${element.image}`} title={element.prod_name} desc={element.detail_desc} color={element.colour_group_name} price={element.price} />
+                            return <CartItem image={`data:image/jpeg;base64,${element.image}`} title={element.prod_name} type={element.product_type_name} desc={element.detail_desc} color={element.colour_group_name} price={element.price} available={element.remaining_stock} gender={element.index_group_name} buyInStore={props.buyInStore} />
                         })}
                     </div>
                 </div>
@@ -81,13 +105,14 @@ function Checkout(props) {
                             <h5 className="card-title text-center mb-7 bigger">Order Summary</h5>
                             <div className="d-flex justify-content-between align-items-center mb-8 p-3">
                                 <p className="total-amount font-weight-bold fs-5">Total amount</p>
-                                <p className="price fw-bold fs-5 text-success">&#8377;{totalAmount}</p>
+                                <p className="price fw-bold fs-5 text-success originalAmt">&#8377;{totalAmount}</p>
+                                {props.buyInStore === true && totalAmount !== (totalAmount - amountDecreased) && <p className="price fw-bold fs-5 text-success newAmount">&#8377;{totalAmount - amountDecreased}</p>}
                             </div>
                             <div className="text-center">
                                 <button className="btn btn-primary btn-block buyBtn mb-3">Buy online</button>
                             </div>
                             <div className="text-center">
-                                <button className="btn btn-primary btn-block buyBtn">Buy in-store</button>
+                                <button className="btn btn-primary btn-block buyBtn buyBtnStore" onClick={()=>{props.setBuyInStore(true)}}>Buy in-store</button>
                             </div>
                         </div>
                     </div>
