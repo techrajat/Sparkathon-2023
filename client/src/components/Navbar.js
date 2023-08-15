@@ -133,7 +133,7 @@ const Navbar = (props) => {
   }, [props.isLogin, props.numItemsCart]);
 
   return (
-    <div className="">
+    <div>
       <div className="bg-[#0071dc] px-3 py-2 lg:px-8 text-white flex justify-between items-center">
         {/* Mobile view starts*/}
         {/* Hamburger Icon */}

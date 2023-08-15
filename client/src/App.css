@@ -135,22 +135,25 @@
   background-color: #e6f1fc;
 }
 
-.offer,
-.offer-detail {
-  height: 440px;
+.promo, .promo-detail {
+  height: 400px;
 }
 
-.offer img {
+.offer, .offer-detail {
+  height: 450px;
+}
+
+.promo img, .offer img {
   height: 224px;
   width: 283px;
 }
 
 @media (max-width: 768px) {
-  .offer {
+  .promo, .offer {
     margin-bottom: 0;
   }
 
-  .offer img {
+  .promo img, .offer img {
     width: 307px;
   }
 }

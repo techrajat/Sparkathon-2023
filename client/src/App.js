@@ -7,6 +7,7 @@ import Registration from './components/Registration';
 import Login from './components/Login';
 import Checkout from './components/Checkout';
 import Payment from './components/Payment';
+import SearchRecommend from './components/SearchRecommend';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route exact path='/login' element={<Login setIsLogin={setIsLogin} />}></Route>
           <Route exact path='/checkout' element={<Checkout isLogin={isLogin} numItemsCart={numItemsCart} buyInStore={buyInStore} setBuyInStore={setBuyInStore} setNumItemsCart={setNumItemsCart} />}></Route>
           <Route exact path='/payment' element={<Payment buyInStore={buyInStore} />}></Route>
+          <Route exact path='/searchrec' element={<SearchRecommend />}></Route>
         </Routes>
       </Router>
     </div>

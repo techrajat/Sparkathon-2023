@@ -94,6 +94,33 @@ def cheaper():
         return {"result": cheaperItems}, 200
     except:
         return {"error": "Server error"}, 500
+    
+# Endpoint to find the top 3 search recommendations of users :-
+@app.route('/toppromotion')
+def toppromotion():
+    try:
+        user = request.environ['user']
+        if not user:
+            return {"error": "User not found"}, 400
+        search_string = search_collection.find_one({'user_id': user['_id']})
+        search_string = search_string['search_string']
+        results = search_result.search_result(search_string, 3)
+        if not len(results):
+            return {"error": "No products found"}, 400
+        results = results.tolist()
+        products = []
+        for article_id in results:
+            product = collection.find_one({"article_id": article_id}, {"_id": 0})
+            if product:
+                product["image"] = base64.b64encode(product["image"]).decode('utf-8')
+                products.append(product)
+            else:
+                print(article_id, " not found")
+        if not len(products):
+            return {"error": "No products found"}, 400
+        return {"result": products}, 200
+    except:
+        return {"error": "Server error"}, 500
 
 # Endpoint to find products according to the search history of users :-
 @app.route('/promotion')
