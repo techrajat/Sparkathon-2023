@@ -13,6 +13,7 @@ function App() {
   const [reloadDesc, setReloadDesc] = useState(0);
   const [isLogin, setIsLogin] = useState(false);
   const [numItemsCart, setNumItemsCart] = useState(0);
+  const [buyInStore, setBuyInStore] = useState(false);
 
   return (
     <div>
@@ -24,7 +25,7 @@ function App() {
           <Route exact path='/itemdesc' element={<ItemDesc key={reloadDesc} reloadDesc={reloadDesc} setReloadDesc={setReloadDesc} isLogin={isLogin} numItemsCart={numItemsCart} setNumItemsCart={setNumItemsCart} />}></Route>
           <Route exact path='/register' element={<Registration />}></Route>
           <Route exact path='/login' element={<Login setIsLogin={setIsLogin} />}></Route>
-          <Route exact path='/checkout' element={<Checkout isLogin={isLogin} numItemsCart={numItemsCart} />}></Route>
+          <Route exact path='/checkout' element={<Checkout isLogin={isLogin} numItemsCart={numItemsCart} buyInStore={buyInStore} setBuyInStore={setBuyInStore} />}></Route>
         </Routes>
       </Router>
     </div>

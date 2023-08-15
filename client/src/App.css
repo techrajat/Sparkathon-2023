@@ -459,6 +459,28 @@
   font-size: large;
 }
 
+.availabilityBadge{
+  z-index: 1;
+}
+
+.notPresent{
+  text-decoration-line: line-through;
+  text-decoration-color: red;
+  text-decoration-thickness: 2px;
+}
+
+.similarCart{
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: large;
+  color: rgb(72, 72, 203);
+  text-decoration-line: underline;
+}
+
+.similarCart:hover{
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
   .mobileCart {
     display: block;
@@ -476,7 +498,6 @@
     align-items: center;
   }
   .price{
-    padding-bottom: 10px;
     color: green;
     font-weight: bold;
     font-size: large;

@@ -3,12 +3,10 @@ import "../App.css"
 import logo from "../assets/logo1.svg";
 import logo2 from "../assets/logo.png";
 import { FaHome, FaHeart, FaUser } from "react-icons/fa";
-import { HiUserGroup } from "react-icons/hi";
+import { FiMail } from "react-icons/fi";
 import { GoSearch } from "react-icons/go";
 import { MdLogin, MdLogout } from "react-icons/md";
-import { BiWorld } from "react-icons/bi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { BsPhone } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = (props) => {
@@ -158,7 +156,7 @@ const Navbar = (props) => {
               <Link to="/" onClick={toggleSidebar}>Home</Link>
             </div>
             <div className="sidebar-item">
-              <p>Partners</p>
+              <p>Contact Us</p>
             </div>
             <div className="loginLinkSide sidebar-item">
               <MdLogout className="usern sidebar-icon" />
@@ -193,8 +191,8 @@ const Navbar = (props) => {
             <Link to="/" className="text-[16px] font-semibold">Home</Link>
           </div>
           <div className="md:flex hidden  items-center gap-2 hover:bg-[#06529a] p-3 rounded-full ">
-            <HiUserGroup className="text-[20px]" />
-            <p className="text-[16px] font-semibold">Partners</p>
+            <FiMail className="text-[20px]" />
+            <p className="text-[16px] font-semibold">Contact Us</p>
           </div>
         </div>
         {/* Middle */}
@@ -235,23 +233,6 @@ const Navbar = (props) => {
               <span class="absolute top-2 right-0 transform translate-x-[-20%]  translate-y-0.1 bg-red-500 text-white rounded-full px-1.5 py-0.5 text-xs" id="numItems"></span>
             </Link>
           </div>
-        </div>
-      </div>
-      {/* Categories */}
-      <div className="desktopView">
-        <div className="bg-[#0071dc] mt-[1px] text-white px-3 py-2 lg:px-8 flex items-center gap-6">
-          <div className="flex items-center gap-1 hover:underline">
-            <BsPhone />
-            <p className="text-[15px] font-bold">Place an order on the App</p>
-          </div>
-          <div className="flex items-center gap-1 hover:underline">
-            <BiWorld />
-            <p className="text-[15px] hover:underline">Guwahati India</p>
-          </div>
-          <p className="hidden md:flex hover:underline">Deals on Phones</p>
-          <p className="hidden md:flex font-bold hover:underline">
-            $499 OFF on Laptops
-          </p>
         </div>
       </div>
     </div>
