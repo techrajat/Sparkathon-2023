@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import CartItem from './CartItem';
 import InStoreInfo from './InStoreInfo';
 
 function Payment(props) {
