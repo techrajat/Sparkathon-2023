@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CartItem from './CartItem';
+import InStoreInfo from './InStoreInfo';
 
 function Payment(props) {
     const [store, setStore] = useState([]);
@@ -34,7 +35,7 @@ function Payment(props) {
         <div className="product-list">
             <div id="payLink">Pay &#8377;{price} for {storeLen} items</div>
             {store.map((element) => {
-                return element.remaining_stock !== 0 && <CartItem image={`data:image/jpeg;base64,${element.image}`} title={element.prod_name} type={element.product_type_name} desc={element.detail_desc} color={element.colour_group_name} price={element.price} available={element.remaining_stock} gender={element.index_group_name} buyInStore={props.buyInStore} />
+                return element.remaining_stock !== 0 && <InStoreInfo image={`data:image/jpeg;base64,${element.image}`} title={element.prod_name} type={element.product_type_name} desc={element.detail_desc} color={element.colour_group_name} price={element.price} available={element.remaining_stock} gender={element.index_group_name} buyInStore={props.buyInStore} section={element.section_name} sectionNum={element.section_no} />
             })}
         </div>
     )
