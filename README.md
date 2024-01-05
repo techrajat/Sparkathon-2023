@@ -1,5 +1,9 @@
 # Walmart Ecommerce Website with NLP Recommendation System
 
+
+https://github.com/techrajat/Sparkathon-2023/assets/118634923/7667f115-5322-489e-8902-86fec0014647
+
+
 ## Project Overview
 
 This project is a submission for Sparkathon 2023, presenting an Ecommerce website for Walmart. The key feature of this platform is the implementation of a Natural Language Processing (NLP) based recommendation system, along with price optimization to enhance user experience and maximize savings.
