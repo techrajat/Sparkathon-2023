@@ -30,21 +30,24 @@ const Navbar = (props) => {
   const handleSearch = async (event) => {
     event.preventDefault();
     const str = document.getElementById('searchBar').value;
+    localStorage.setItem('searchStr', str);
     document.getElementById('searchBar').value = null;
-    if (str) {
-      localStorage.setItem('searchStr', str);
-      props.setNewSearch(props.newSearch + 1);
+    props.setNewSearch(props.newSearch + 1);
+    const token = localStorage.getItem('token');
+    if (token) {
       const response = await fetch("http://127.0.0.1:8000/setstring", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
-          "Authorization": localStorage.getItem('token')
+          "Authorization": token
         },
         body: `str=${encodeURIComponent(str)}`
       });
       if (response.status === 200) {
         console.log("Search string updated")
       }
+    }
+    if (str) {
       navigate('/search');
     }
   };
