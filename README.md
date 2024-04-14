@@ -11,7 +11,6 @@ This project is a submission for Sparkathon 2023, presenting an Ecommerce websit
 ### Tech Stack
 
 - **Frontend:**
-  - Node.js
   - React.js
 
 - **Backend:**
