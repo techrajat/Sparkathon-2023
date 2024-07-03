@@ -1,4 +1,4 @@
-# Walmart Ecommerce Website with NLP Recommendation System
+# Ecommerce Website with NLP Recommendation System
 
 
 https://github.com/techrajat/Sparkathon-2023/assets/118634923/7667f115-5322-489e-8902-86fec0014647
