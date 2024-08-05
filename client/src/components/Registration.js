@@ -114,7 +114,7 @@ function Registration(props) {
             pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
           />
           <Form.Control.Feedback type="invalid">
-            Please should contain : <br/>
+            Password should contain : <br/>
             - At least 8 characters <br/>
             - At least 1 alphabet <br/>
             - At least 1 number <br/>
